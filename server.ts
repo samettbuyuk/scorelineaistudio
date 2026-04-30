@@ -14,10 +14,10 @@ async function startServer() {
   app.use(cors());
   app.use(express.json());
 
-  // API Routes
+  // Health Check
   app.get("/api/health", (req, res) => {
     res.json({ 
-      status: "ok",
+      status: "ok", 
       nodeEnv: process.env.NODE_ENV || 'development'
     });
   });

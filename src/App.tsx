@@ -29,9 +29,9 @@ export default function App() {
       if (window.innerWidth < 768) {
         document.getElementById('result-area')?.scrollIntoView({ behavior: 'smooth' });
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
-      setError("İçerik işlenirken bir hata oluştu. Lütfen bağlantınızı kontrol edin.");
+      setError(err.message || "İçerik işlenirken bir hata oluştu. Lütfen bağlantınızı kontrol edin.");
     } finally {
       setLoading(false);
     }

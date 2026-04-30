@@ -21,15 +21,6 @@ export const geminiService = {
         model: "gemini-3-flash-preview",
         contents: `Mod: ${mode}\nGirdi Metni: "${input}"\n\nLütfen bu metni spor dünyasına uygun${isTranslate ? ", tam metin çeviri olacak şekilde" : ""} dönüştür.`,
         config: {
-          responseMimeType: "application/json",
-          responseSchema: {
-            type: Type.OBJECT,
-            properties: {
-              text: { type: Type.STRING, description: "Dönüştürülmüş tweet metni" },
-              explanation: { type: Type.STRING, description: "Neden bu şekilde optimize edildiğinin kısa açıklaması" }
-            },
-            required: ["text"]
-          },
           systemInstruction: `Sen Scoreline AI asistanısın, profesyonel bir spor Twitter içerik üreticisisin. 
           Görevin: Gelen metni Türkçeye çevirmek (eğer yabancı dildeyse) veya özetleyip optimize etmek.
           
@@ -41,11 +32,21 @@ export const geminiService = {
           - Dil samimi, enerjik ve spor dünyasına uygun olmalı.
           - Emoji kullanımı dengeli ve profesyonel (spor temalı) olmalı.
           - KESİNLİKLE HASHTAG (#) EKLEME. Kullanıcı hashtag istemiyor.
-          - Yanıtı her zaman JSON formatında ver.`
+          - Yanıtı her zaman JSON formatında ver.`,
+          responseMimeType: "application/json",
+          responseSchema: {
+            type: Type.OBJECT,
+            properties: {
+              text: { type: Type.STRING, description: "Dönüştürülmüş tweet metni" },
+              explanation: { type: Type.STRING, description: "Neden bu şekilde optimize edildiğinin kısa açıklaması" }
+            },
+            required: ["text"]
+          }
         }
       });
 
-      return JSON.parse(response.text || "{}") as TransformationResult;
+      const responseText = response.text || "{}";
+      return JSON.parse(responseText) as TransformationResult;
     } catch (error) {
       console.error("Client Gemini Error:", error);
       throw error;
@@ -69,7 +70,8 @@ export const geminiService = {
         }
       });
       
-      return JSON.parse(response.text || "[]");
+      const responseText = response.text || "[]";
+      return JSON.parse(responseText);
     } catch (error) {
       console.error("Client Gemini Suggest Error:", error);
       return [];
