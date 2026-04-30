@@ -176,15 +176,15 @@ export default function App() {
                 <h3 className="text-xs font-bold font-display uppercase tracking-[0.3em] text-slate-400">Ana Taslak</h3>
               </div>
 
-              <div className="relative group">
+              <div className="space-y-4">
                 <textarea
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="İçeriği buraya yapıştırın veya yazmaya başlayın..."
-                  className="w-full h-[350px] bg-white border border-slate-200 p-8 rounded-[32px] focus:outline-none focus:border-brand-primary/50 focus:ring-4 focus:ring-emerald-500/5 transition-all text-xl font-medium leading-relaxed placeholder:text-slate-300 selection:bg-brand-primary/10"
+                  className="w-full h-[350px] bg-white border border-slate-200 p-8 rounded-[32px] focus:outline-none focus:border-brand-primary/50 focus:ring-4 focus:ring-emerald-500/5 transition-all text-xl font-medium leading-loose placeholder:text-slate-300 selection:bg-brand-primary/10 caret-brand-primary overflow-y-auto"
                 />
                 
-                <div className="absolute bottom-6 left-6 right-6 flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-3">
                    <button 
                     onClick={() => handleTransform('translate')}
                     disabled={loading || !input}

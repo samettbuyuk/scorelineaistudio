@@ -42,7 +42,25 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
-/* Hide scrollbar but keep functionality */
+/* Elegant minimal scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #E2E8F0;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #CBD5E1;
+  background-clip: content-box;
+}
+
+/* Hide scrollbar class when specifically requested */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
