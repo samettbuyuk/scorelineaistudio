@@ -158,9 +158,14 @@ export default function App() {
               <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
               Profesyonel Medya Asistanı
             </motion.div>
-            <h1 className="text-4xl md:text-7xl font-display font-black tracking-tight leading-none italic uppercase gradient-text-navy">
-              Maç Günü <br />Analizi
-            </h1>
+            <div className="max-w-2xl space-y-4">
+              <p className="text-lg md:text-xl font-medium leading-relaxed text-slate-600">
+                Scoreline AI Studio, spor medyası profesyonelleri ve dijital içerik üreticileri için tasarlanmış gelişmiş bir yapay zeka asistanıdır. Yabancı dildeki kaynakları anlık olarak Türkçeye çevirir, karmaşık haberleri etkileyici tweetlere dönüştürür ve spor dünyasının dinamik diline uygun içerikler üretmenizi sağlar.
+              </p>
+              <p className="text-sm text-slate-400 leading-relaxed font-normal">
+                Sadece metninizi yapıştırın veya anahtar kelimelerinizi girin; sistemimiz Twitter algoritmasına tam uyumlu, etkileşim odaklı ve profesyonel içerikleri saniyeler içinde sizin için optimize etsin.
+              </p>
+            </div>
           </header>
 
           <section className="grid grid-cols-1 lg:grid-cols-12 gap-8">
