@@ -12,6 +12,7 @@ export default function App() {
   const [suggestLoading, setSuggestLoading] = useState(false);
   const [copied, setCopied] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   // Character counter for Twitter
   const charCount = result?.text.length || 0;
@@ -20,6 +21,7 @@ export default function App() {
   const handleTransform = async (mode: 'translate' | 'summarize' | 'enhance') => {
     if (!input.trim()) return;
     setLoading(true);
+    setError(null);
     try {
       const data = await geminiService.transformContent(input, mode);
       setResult(data);
@@ -29,6 +31,7 @@ export default function App() {
       }
     } catch (err) {
       console.error(err);
+      setError("İçerik işlenirken bir hata oluştu. Lütfen bağlantınızı kontrol edin.");
     } finally {
       setLoading(false);
     }
@@ -205,6 +208,11 @@ export default function App() {
 
             {/* Preview Side */}
             <div id="result-area" className="lg:col-span-12 xl:col-span-5 space-y-6">
+              {error && (
+                <div className="p-4 bg-red-50 border border-red-100 rounded-2xl text-red-600 text-sm font-medium animate-pulse">
+                  {error}
+                </div>
+              )}
               <h3 className="text-xs font-bold font-display uppercase tracking-[0.3em] text-slate-400">X Önizleme</h3>
               
               <AnimatePresence mode="wait">

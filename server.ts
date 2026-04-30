@@ -15,6 +15,15 @@ async function startServer() {
   app.use(cors());
   app.use(express.json());
 
+  // Health Check
+  app.get("/api/health", (req, res) => {
+    res.json({ 
+      status: "ok", 
+      hasApiKey: !!process.env.GEMINI_API_KEY,
+      nodeEnv: process.env.NODE_ENV || 'development'
+    });
+  });
+
   const apiKey = process.env.GEMINI_API_KEY;
   const genAI = apiKey ? new GoogleGenAI(apiKey) : null;
 
@@ -27,7 +36,12 @@ async function startServer() {
     }
 
     try {
+      console.log(`Transforming content: mode=${mode}, inputLength=${input?.length}`);
       const isTranslate = mode === 'translate';
+      if (!input) {
+        return res.status(400).json({ error: "Input is required" });
+      }
+      
       const model = genAI.getGenerativeModel({ 
         model: "gemini-1.5-flash",
         generationConfig: {
@@ -58,11 +72,13 @@ async function startServer() {
       const prompt = `Mod: ${mode}\nGirdi Metni: "${input}"\n\nLütfen bu metni spor dünyasına uygun${isTranslate ? ", tam metin çeviri olacak şekilde" : ""} dönüştür.`;
       
       const result = await model.generateContent(prompt);
-      const output = result.response.text();
-      res.json(JSON.parse(output || "{}"));
+      const responseText = result.response.text();
+      console.log("Gemini Response received");
+      res.json(JSON.parse(responseText || "{}"));
     } catch (error) {
       console.error("Gemini Error:", error);
-      res.status(500).json({ error: "Failed to transform content" });
+      const errorMessage = error instanceof Error ? error.message : "Internal Server Error";
+      res.status(500).json({ error: errorMessage });
     }
   });
 
