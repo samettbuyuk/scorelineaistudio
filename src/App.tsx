@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { LayoutGrid, TrendingUp, Sparkles, Send, Copy, RefreshCcw, Languages, AlignLeft, Hash, Check, ExternalLink, Menu, X, ChevronRight } from 'lucide-react';
+import { LayoutGrid, TrendingUp, Sparkles, Send, Copy, RefreshCcw, Languages, AlignLeft, Hash, Check, ExternalLink, Menu, X, ChevronRight, Trophy } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { geminiService, TransformationResult } from './services/geminiService';
 
@@ -66,7 +66,7 @@ export default function App() {
       <header className="md:hidden flex items-center justify-between p-4 border-b border-slate-200 bg-white/80 backdrop-blur-md sticky top-0 z-50">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 bg-[#0F172A] rounded-lg flex items-center justify-center shadow-lg">
-            <LayoutGrid className="text-white size-4" />
+            <Trophy className="text-emerald-400 size-4" />
           </div>
           <span className="font-bold text-lg tracking-tight">Scoreline AI Studio</span>
         </div>
@@ -86,7 +86,7 @@ export default function App() {
           >
             <div className="hidden md:flex items-center gap-3">
               <div className="w-10 h-10 bg-[#0F172A] rounded-xl flex items-center justify-center shadow-md">
-                <LayoutGrid className="text-white size-5" />
+                <Trophy className="text-emerald-400 size-5" />
               </div>
               <h1 className="font-display font-bold text-2xl gradient-text-navy tracking-tighter">Scoreline AI Studio</h1>
             </div>
